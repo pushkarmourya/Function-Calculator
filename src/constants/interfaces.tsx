@@ -3,3 +3,10 @@ export interface Coordinate {
     y: number;
 }
 
+export interface CardData {
+	name: string;
+	nextFunction: string;
+	input: string | number;
+	inputCoordinates: Coordinate;
+	outputCoordinates: Coordinate;
+}

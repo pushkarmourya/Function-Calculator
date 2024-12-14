@@ -9,52 +9,91 @@ import { Coordinate } from "../../constants";
  *  Line (Curved) drawn through given points
  */
 interface Props {
-  points: Coordinate[]; 
+  points: Coordinate[];
 }
 
 const ConnectingLine = (props: Props): JSX.Element => {
   const { points } = props;
 
-  const generateCurvePath = () => {
-    let path = `M ${points[0]} ${points[0]}`;
+  if (points.length < 2)
+    return <></>
 
-    for(let i=1; i<points.length-1;i++){
-      path += ` Q ${points[i].x} ${points[i].y}, ${points[i+1].x} ${points[i+1].y}`;
+  console.log({ points })
+
+  const generateCurvePath = () => {
+    let path = `M ${points[0].x} ${points[0].y}`;
+
+    for (let i = 1; i < points.length - 1; i++) {
+      path += ` Q ${points[i].x} ${points[i].y}, ${points[i + 1].x} ${points[i + 1].y}`;
     };
 
+    if (points.length === 2) {
+      path += ` l ${points[1].x} ${points[1].y}`;
+    }
+
+    console.log({ path })
     return path;
   };
 
-  if (!points.length)
-    return <></>
+  console.log(generateCurvePath())
+  const renderLine = (): JSX.Element => {
+    return <svg
+        width="100%"
+        height="100%"
+        style={{
+          position: "relative",
+          top: 0,
+          left: 0,
+          pointerEvents: "none",
+          zIndex: 10,
+        }}>
+        <line
+          x1={points[0].x}
+          y1={points[0].y}
+          x2={points[1].x}
+          y2={points[1].y}
+          stroke="#0066FF"
+          strokeOpacity="0.3"
+          strokeWidth="7" />
+      </svg>
+  }
 
+  const renderCurve = (): JSX.Element => {
+    return <svg
+    width="100%"
+    height="100%"
+    style={{
+      position: "relative",
+      top: 0,
+      left: 0,
+      pointerEvents: "none",
+      zIndex: 10,
+    }}
+  >
+    <path
+      d={generateCurvePath()}
+      stroke="#0066FF"
+      strokeOpacity="0.3"
+      strokeWidth="7"
+    />
+  </svg>
+  }
+
+  const renderPath = (): JSX.Element => {
+    if(points.length === 2){
+      return renderLine();
+    }
+    return renderCurve();
+  }
   return (
     <div
       style={{
-        position: "relative",
+        position: "absolute",
         width: "100%",
         height: "100vh",
-        background: "#f8f9fa",
       }}
     >
-      <svg
-        width="100%"
-        height="100%"
-        style={{ position: "absolute", top: 0, left: 0, pointerEvents: "none" }}
-      >
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="100%" stopColor="#3bbbdb" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-
-        <path
-          d={generateCurvePath()}
-          stroke="url(#lineGradient)"
-          fill="none"
-          strokeWidth="5"
-        />
-      </svg>
+      {renderPath()}
     </div>
   );
 };
