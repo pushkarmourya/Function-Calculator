@@ -1,0 +1,1 @@
+export {default as SixDot} from './six-dot.png';
