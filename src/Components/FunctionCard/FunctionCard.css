@@ -3,7 +3,7 @@
     border-radius: 15px;
     padding: 20px;
     width: 235px;
-    height: 250px;
+    height: 240px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     margin: 30px;
@@ -65,27 +65,3 @@
     border: #ccc;
     align-content: center;
 }
-
-.radio-circle {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border: 2px solid lightgray;
-    border-radius: 50%;
-    position: relative;
-    background-color: transparent;
-    margin: 5px;
-    margin-top: 8px;
-  }
-  
-  .radio-circle::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 8px;
-    height: 8px;
-    background-color: #0066FF; 
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
