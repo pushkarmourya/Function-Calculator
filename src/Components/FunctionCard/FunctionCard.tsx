@@ -1,4 +1,4 @@
-import React, { JSX, memo, useEffect, useRef, useState } from "react";
+import React, { JSX, useEffect, useRef, useState } from "react";
 import { SixDot } from "../../assets/icons";
 import { Coordinate, strings } from "../../constants";
 import { evaluateEquation } from "../../utils";
@@ -14,6 +14,8 @@ interface FunctionCardProps {
   getOutputCoordinates?: (outputDot: Coordinate) => void;
 }
 
+const { INPUT, INVALID_EQUATION, OUTPUT, EQUATION, NEXT_FUNCTION, PLACEHOLDER } = strings.FUNCTION_CARD
+
 const CardHeader = React.memo(({ name }: { name: string }): JSX.Element => {
   return <div>
     <div className="function-header">
@@ -21,7 +23,7 @@ const CardHeader = React.memo(({ name }: { name: string }): JSX.Element => {
       <div className="function-header-text">{name}</div>
     </div>
     <label className="function-label" htmlFor="equation">
-      {strings.FUNCTION_CARD.EQUATION}
+      {EQUATION}
     </label>
   </div>
 })
@@ -45,16 +47,29 @@ const FunctionCard = (props: FunctionCardProps): JSX.Element => {
 
   const solveEquation = () => {
     try {
-      const solution = evaluateEquation(equation, input); // Evaluate the equation
+      const solution = evaluateEquation(equation, input);
       setOutput(solution);
     } catch (error) {
-      setOutput("Invalid equation!");
+      setOutput(INVALID_EQUATION);
     }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEquation(e.target.value);
   };
+
+  const renderDropDown = () => {
+    return <>
+      <label className="function-label" htmlFor="next-function">
+        {NEXT_FUNCTION}
+      </label>
+      <select id="next-function" className="function-select" disabled>
+        <option value="" selected className="dropdown-option">
+          {nextFunction}
+        </option>
+      </select>
+    </>
+  }
 
   return (
     <div className="function-card">
@@ -63,30 +78,21 @@ const FunctionCard = (props: FunctionCardProps): JSX.Element => {
         type="text"
         id="equation"
         className="function-input"
-        placeholder="Enter equation, e.g., x^2 + 2*x + 1"
+        placeholder={PLACEHOLDER}
         value={equation}
         onChange={handleInputChange}
       />
-
-      <label className="function-label" htmlFor="next-function">
-        {strings.FUNCTION_CARD.NEXT_FUNCTION}
-      </label>
-      <select id="next-function" className="function-select">
-        <option value="" selected>
-          {nextFunction}
-        </option>
-      </select>
-
+      {renderDropDown()}
       <div className="radio-group">
         <label className="radio-option">
           <RadioDot
             ref={inputDotRef}
             getCoordinates={getInputCoordinates}
           />
-          {strings.FUNCTION_CARD.INPUT}
+          {INPUT}
         </label>
         <label className="radio-option">
-          {strings.FUNCTION_CARD.OUTPUT}
+          {OUTPUT}
           <RadioDot
             ref={outputDotRef}
             getCoordinates={getOutputCoordinates}

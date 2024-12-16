@@ -21,25 +21,29 @@ const OutputCard = memo((props: OutputCardProps): JSX.Element => {
   const borderColor = '#4CAF79'
 
   return (
-    <div className="io-card-wrapper">
+    <div className="output-card-wrapper">
       <div
         className="io-card-header"
         style={{ backgroundColor: borderColor }}
       >
-        {'Final Value'}
+        {'Final Output y'}
       </div>
-
       <div
         className="io-card"
         style={{ borderColor }}
       >
-        <RadioDot ref={outputRef}/>
-        <div
-          className="io-divider"
-          style={{ backgroundColor: borderColor }}
-        ></div>
+        <div style={{ height: 50, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
 
-        <span className="io-value">{output}</span>
+          <RadioDot
+            ref={outputRef}
+            getCoordinates={getOutputCoordinate}
+          />
+          <div
+            className="io-divider"
+            style={{ backgroundColor: borderColor }}
+          />
+        </div>
+        <span className="output-value" style={{ width: 50, padding: 0, textAlign: 'end', paddingRight: 10 }}>{output}</span>
       </div>
     </div>
   );

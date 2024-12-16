@@ -1,9 +1,22 @@
-.io-card-wrapper {
+.input-card-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  position: relative;
+  position: absolute;
+  left: 150px; 
+  top: 260px;
+  height: 50px;
+}
+
+.output-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: absolute; 
+  right: 150px; 
+  top: 260px;
 }
 
 .io-card-header {
@@ -23,8 +36,10 @@
   justify-content: space-between;
   border: 2px solid;
   border-radius: 16px;
-  padding: 6px 0; 
+  padding: 0; 
   width: 115px; 
+  height: 50px;
+  box-sizing: border-box;
 }
 
 .io-value {
@@ -34,18 +49,21 @@
   font-weight: bold;
   color: #000;
   outline: none;
+  margin-left: 5px;
 }
 
-.io-radio-dot {
-  width: 16px;
-  height: 16px;
-  border: 3px solid #d3d3d3;
-  background-color: #0066ff;
-  border-radius: 50%;
-  margin-left: 8px;
+.output-value {
+  text-align: center;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  outline: none;
+  padding-right: 10px;
+  width: 80;
 }
 
 .io-divider {
-  width: 2px;
+  width: 0.5px;
   height: 100%;
 }

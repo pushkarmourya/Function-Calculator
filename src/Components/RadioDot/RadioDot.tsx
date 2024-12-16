@@ -14,7 +14,7 @@ export const RadioDot = memo((props: RadioProps): JSX.Element => {
     if (ref.current) {
       const inputRect: Coordinate = getElementCoordinates(ref.current);
 
-      getCoordinates({ x: inputRect.x - 5, y: inputRect.y - 5 } as Coordinate);
+      getCoordinates({ x: inputRect.x - 6, y: inputRect.y - 5 } as Coordinate);
     }
   }, [ref]);
 

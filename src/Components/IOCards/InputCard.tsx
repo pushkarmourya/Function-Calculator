@@ -31,33 +31,37 @@ const InputCard = (props: InputCardProps): JSX.Element => {
   const borderColor = '#E29A2D'
 
   return (
-    <div className="io-card-wrapper">
-    <div
-      className="io-card-header"
-      style={{ backgroundColor: borderColor }}
-    >
-      {'Initila Value of x'}
-    </div>
-
-    <div
-      className="io-card"
-      style={{ borderColor }}
-    >
-      <input
-        type="text"
-        value={input}
-        onChange={handleInputChange}
-        className="io-value"
-        placeholder="Enter number"
-      />
-
+    <div className="input-card-wrapper">
       <div
-        className="io-divider"
+        className="io-card-header"
         style={{ backgroundColor: borderColor }}
-      ></div>
-      <RadioDot ref={inputRef}/>
+      >
+        {'Initila Value of x'}
+      </div>
+      <div
+        className="io-card"
+        style={{ borderColor }}
+      >
+        <div style={{ height: 50, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <input
+            type="text"
+            value={input}
+            onChange={handleInputChange}
+            className="io-value"
+            placeholder="x"
+            style={{ width: 60, padding: 0, textAlign: 'start', paddingLeft: 10 }}
+          />
+          <div
+            className="io-divider"
+            style={{ backgroundColor: borderColor }}
+          />
+        </div>
+        <RadioDot
+          ref={inputRef}
+          getCoordinates={getInputCoordinate}
+        />
+      </div>
     </div>
-  </div>
   );
 };
 
