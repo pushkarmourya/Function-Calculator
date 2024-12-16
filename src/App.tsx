@@ -3,7 +3,7 @@ import './App.css';
 import { ConnectingLine } from './Components/ConnectingLine/ConnectingLine';
 import FunctionCard from './Components/FunctionCard/FunctionCard';
 import InputCard from './Components/IOCards/InputCard';
-import { OutputCard } from './Components/IOCards/OutputCard';
+import OutputCard from './Components/IOCards/OutputCard';
 import { CardData, Coordinate } from './constants';
 
 const App = () => {
